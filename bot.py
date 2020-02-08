@@ -40,22 +40,20 @@ def admin_msg(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    numOfDecl = 0
+    number_of_deviations = 0
     global user_id, token
     ###
     if call.message:
         if call.data == 'a1':
             bot.send_message(user_id, 'Разрешение получено. Токен: '+token)
-            i = 0
-            for admin_id in config.AdminInfo:
-                bot.edit_message_text(chat_id=admin_id, message_id=mEditIds[i],
+            for (admin_id, message_id) in zip(config.AdminInfo, mEditIds):
+                bot.edit_message_text(chat_id=admin_id, message_id=message_id,
                                       text='Отправлено разрешение администратором @'+call.message.chat.username+'.')
-                i = i + 1
         if call.data == 'a2':
-            numOfDecl = numOfDecl + 1
+            number_of_deviations += 1
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                   text='Отклонено.')
-            if numOfDecl == len(config.AdminInfo):
+            if number_of_deviations == len(config.AdminInfo):
                 bot.send_message(user_id, 'Отказано.')
 
 
