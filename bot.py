@@ -34,8 +34,7 @@ def admin_msg(message):
         btn_1= telebot.types.InlineKeyboardButton(text='Разрешить',callback_data='a1')
         btn_2 = telebot.types.InlineKeyboardButton(text='Отклонить', callback_data='a2')
         markup.add(btn_1, btn_2)
-        for admin in config.AdminInfo:
-            admin_id = admin
+        for admin_id in config.AdminInfo:
             mess = bot.send_message(admin_id, '@'+message.chat.username+' Запрашивает токен', reply_markup = markup)
             mEditIds.append(mess.message_id)
 
