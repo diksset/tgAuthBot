@@ -47,8 +47,7 @@ def callback_inline(call):
         if call.data == 'a1':
             bot.send_message(user_id, 'Разрешение получено. Токен: '+token)
             i = 0
-            for admin in config.AdminInfo:
-                admin_id = admin
+            for admin_id in config.AdminInfo:
                 bot.edit_message_text(chat_id=admin_id, message_id=mEditIds[i],
                                       text='Отправлено разрешение администратором @'+call.message.chat.username+'.')
                 i = i + 1
